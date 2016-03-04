@@ -16,3 +16,10 @@ sudo npm install -g grunt-cli
 sudo npm install -g bower
 
 ```
+
+Bower
+------
+
+- bower init
+- bower install angularjs --save
+- bower install bootstrap --save
