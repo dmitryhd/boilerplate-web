@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/jasmine-html.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.3/boot.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-mocks.js"></script>
+        <script src="static/js/simple_app.js"></script>
+    </head>
+    <body>
+    </body>
+    <script type="text/javascript">
+        describe('SimpleCtrl', function() {
+            beforeEach(angular.mock.module('simpleApp'));
+
+            var $controller;
+
+            beforeEach(angular.mock.inject(function(_$controller_){
+                // The injector unwraps the underscores (_) from around the parameter names when matching
+                $controller = _$controller_;
+            }));
+
+            describe('$scope.fn', function() {
+                it('sets the strength to "strong" if the password length is >8 chars', function() {
+                    var $scope = {};
+                    var controller = $controller('SimpleCtrl', { $scope: $scope });
+                    $scope.someVar = 100;
+                    var res = $scope.fn();
+                    expect(res).toEqual(100);
+                });
+            });
+        });
+
+        // Paste in the test code here.
+
+    </script>
+</html>
