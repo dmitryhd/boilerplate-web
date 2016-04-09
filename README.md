@@ -18,6 +18,11 @@ sudo npm install -g bower
 
 ```
 
+Unittests (Jasmine + angular mock)
+------
+
+open unittest.html in browser
+
 Bower
 ------
 
