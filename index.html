@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>template</title>
   <!-- Bootstrap -->
-  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link href="static/style/bootstrap-callout.css" rel="stylesheet">
 </head>
 <body>
@@ -15,7 +15,7 @@
     <!-- category (mul), week(one), validated_reason (галки из всех воз) -->
     <div class="panel panel-default">
       <div class="panel-heading">
-      Filters
+        Filters
       </div>
       <div class="panel-body">
         <table class='table'>
@@ -42,25 +42,25 @@
     <table class='table'>
       <tr>
         <th>item_id</th>
-        <th>action_datetime</th>
         <th>reason</th>
         <th>category</th>
         <th>week</th>
+        <th>validated reason</th>
       </tr>
       <tr ng-repeat='item in filtered=(data | filter:filterByProperties)'>
         <td>{{item.item_id}} ({{item.item_ver}})</td>
         <td>{{item.action_datetime}}</td>
-        <td>{{item.action_reason}}</td>
         <td>{{item.category}}</td>
         <td>{{item.week}}</td>
+        <td>{{item.validated_reason}}</td>
       </tr>
     </table>
   </div>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.4/angular.js"></script>
   <script>
     var data = [
     {'action': 'Item is allowed by auto premoderation',
@@ -77,7 +77,7 @@
     'subcategory': 'Вакансии',
     'title': 'Уборщицы в фитнес клуб',
     'validated_action': 'Item is rejected',
-    'validated_reason': 'Фото не является логотипом',
+    'validated_reason': 'Фото не является логотипом, 2',
     'validator_logins': ['ivalova', 'arybintsev']},
 
     {'action': 'Item is allowed by auto premoderation',
@@ -118,13 +118,8 @@
     var app = angular.module('simpleApp', [])
     .controller('SimpleCtrl', function($scope) {
       $scope.data = data;
-      $scope.setUp = function(){
-        $scope.categories = ['Работа', 'Авто'];
-        $scope.weeks = [1, 15];
-        $scope.validated_reasons = ['Фото не является логотипом', 'drop shit on fan'];
-      };
-      $scope.setUp();
       $scope.filter = {};
+
       $scope.getOptionsFor = function (propName) {
         return ($scope.data || []).map(function (w) {
           return w[propName];
@@ -146,18 +141,24 @@
       }; 
       function noSubFilter(subFilterObj) {
         for (var key in subFilterObj) {
-            if (subFilterObj[key]) return false;
+          if (subFilterObj[key]) return false;
         }
         return true;
-      }
+      };
+      $scope.setUp = function(){
+        $scope.categories =  $scope.getOptionsFor('category'); //  ['Работа', 'Авто'];
+        $scope.weeks = $scope.getOptionsFor('week');
+        $scope.validated_reasons = $scope.getOptionsFor('validated_reason');
+      };
+      $scope.setUp();
       
-});
+    });
     app.filter('capitalizeFirst', function () {
-    return function (str) {
+      return function (str) {
         str = str || '';
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
-    };
-});
+      };
+    });
   </script>
 </body>
 </html>
